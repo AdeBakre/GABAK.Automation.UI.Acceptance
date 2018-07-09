@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GABAK.Automation.UI.Acceptance.Base;
+﻿using GABAK.Automation.UI.Acceptance.Base;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
@@ -18,13 +13,13 @@ namespace GABAK.Automation.UI.Acceptance.Pages
         [FindsBy(How = How.CssSelector, Using = ".form-control[placeholder='Article Title']")]
         private IWebElement ArticleTitle { get; set; }
 
-        [FindsBy(How = How.CssSelector, Using = "fieldset .form-group:nth-child(2)")]
+        [FindsBy(How = How.CssSelector, Using = "fieldset .form-group:nth-child(2)>input")]
         private IWebElement About_Article { get; set; }
 
-        [FindsBy(How = How.CssSelector, Using = "fieldset .form-group:nth-child(3)")]
+        [FindsBy(How = How.CssSelector, Using = "fieldset .form-group:nth-child(3)>textarea")]
         private IWebElement Article_Content { get; set; }
 
-        [FindsBy(How = How.CssSelector, Using = "fieldset .form-group:nth-child(4)")]
+        [FindsBy(How = How.CssSelector, Using = "fieldset .form-group:nth-child(4)>input")]
         private IWebElement Tag_Field { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = ".btn-primary")]

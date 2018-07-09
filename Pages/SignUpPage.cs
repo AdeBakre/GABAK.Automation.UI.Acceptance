@@ -56,7 +56,8 @@ namespace GABAK.Automation.UI.Acceptance.Pages
         public HomePageOnline ClickSignUpButton()
         {
             Sign_In_Button.Click();
-            return GetPageWithTitle<HomePageOnline>();
+            return GetPage<HomePageOnline>();
+            //return GetPageWithTitle<HomePageOnline>();
 
         }
 

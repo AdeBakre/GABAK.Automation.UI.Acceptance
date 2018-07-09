@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
@@ -21,13 +22,10 @@ namespace GABAK.Automation.UI.Acceptance.Pages
         [FindsBy(How = How.CssSelector, Using = ".ion-compose")]
         private IWebElement New_Article { get; set; }
 
-        [FindsBy(How = How.CssSelector, Using = ".navbar-nav-link[ui-sref='app.settings']")]
-        private IWebElement App_Settings { get; set; }
-
         [FindsBy(How = How.CssSelector, Using = ".container>ul:nth-child(3)>li:nth-child(4)>a")]
         private IWebElement Username { get; set; }
 
-        [FindsBy(How = How.CssSelector, Using = "")]
+        [FindsBy(How = How.CssSelector, Using = ".article-preview")]
         private IList<IWebElement> Articles;
 
         #endregion
@@ -51,22 +49,23 @@ namespace GABAK.Automation.UI.Acceptance.Pages
             return YourFeedsLink.Displayed;
         }
 
-        public bool GetFeedsDisplayed()
+        public bool GetNoFeedsDisplayed()
         {
             bool result = false;
-            int article_count = Articles.Count;
-            if (article_count < 1)
-            {
-                result = true;
-            }
-
+      
+                int article_count = Articles.Count;
+                if (article_count < 1)
+                {
+                    result = true;
+                }
+    
             return result;
         }
 
-        public EditorPage ClickOnNewArticle()
+        public void ClickOnNewArticle()
         {
             New_Article.Click();
-            return GetPage<EditorPage>();
+
         }
 
         #endregion

@@ -11,9 +11,11 @@ namespace GABAK.Automation.UI.Acceptance.Pages
 {
     public class ArticlePage : BasePage
     {
+        public override string DefaultTitle { get { return "Editor — Conduit"; } }
+
         #region Webelements
 
-        [FindsBy(How = How.CssSelector, Using = "h1']")]
+        [FindsBy(How = How.CssSelector, Using = ".container>h1")]
         private IWebElement Article_Title { get; set; }
 
         [FindsBy(How = How.CssSelector, Using = ".row.article-content")]

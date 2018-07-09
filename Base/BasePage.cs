@@ -14,8 +14,7 @@ namespace GABAK.Automation.UI.Acceptance.Base
         {
             TPage pageInstance = new TPage();
 
-            //if (string.IsNullOrWhiteSpace(expectedTitle)) expectedTitle = pageInstance.DefaultTitle;
-
+            PageFactory.InitElements(Driver, pageInstance);
             return pageInstance;
         }
 

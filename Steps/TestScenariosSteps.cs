@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GABAK.Automation.UI.Acceptance.Base;
+﻿using GABAK.Automation.UI.Acceptance.Base;
 using GABAK.Automation.UI.Acceptance.Pages;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
@@ -44,7 +40,9 @@ namespace GABAK.Automation.UI.Acceptance.Steps
             CurrentPage.As<SignUpPage>().EnterUserName(form.username);
             CurrentPage.As<SignUpPage>().EnterEmailAddress(form.email);
             CurrentPage.As<SignUpPage>().EnterPassword(form.password);
-            NextPage = CurrentPage.As<SignUpPage>().ClickSignUpButton();
+            CurrentPage.As<SignUpPage>().ClickSignUpButton();
+
+            CurrentPage = BasePage.GetHomePageOnline(CurrentDriver);
         }
 
         [When(@"the user clicks on the sign up link")]
@@ -110,14 +108,6 @@ namespace GABAK.Automation.UI.Acceptance.Steps
             CurrentPage.As<SignUpPage>().ClickSignUpWithInvalid();
         }
 
-
-
-        [When(@"user is not signed in")]
-        public void WhenUserIsNotSignedIn()
-        {
-            ScenarioContext.Current.Pending();
-        }
-
         [Then(@"the global feeds and popular tags are displayed")]
         public void ThenTheGlobalFeedsAndPopularTagsAreDisplayed()
         {
@@ -154,7 +144,7 @@ namespace GABAK.Automation.UI.Acceptance.Steps
         [Then(@"the Your Feeds section should be empty")]
         public void ThenTheYourFeedsSectionShouldBeEmpty()
         {
-            Assert.True(CurrentPage.As<HomePageOnline>().GetFeedsDisplayed());
+            Assert.True(CurrentPage.As<HomePageOnline>().GetNoFeedsDisplayed());
         }
 
         [When(@"the user creates a new article")]
@@ -162,14 +152,19 @@ namespace GABAK.Automation.UI.Acceptance.Steps
         {
             dynamic form = table.CreateDynamicInstance();
 
-            NextPage = CurrentPage.As<HomePageOnline>().ClickOnNewArticle();
+           
+            CurrentPage.As<HomePageOnline>().ClickOnNewArticle();
+
+            CurrentPage = BasePage.GetEditorPage(CurrentDriver);
 
             CurrentPage.As<EditorPage>().EnterArticleTitle(form.Title);
-            CurrentPage.As<EditorPage>().EnterArticleTitle(form.About);
-            CurrentPage.As<EditorPage>().EnterArticleTitle(form.Description);
-            CurrentPage.As<EditorPage>().EnterArticleTitle(form.Tags);
+            CurrentPage.As<EditorPage>().EnterAboutArticle(form.About);
+            CurrentPage.As<EditorPage>().EnterArticleDescription(form.Description);
+            CurrentPage.As<EditorPage>().EnterTags(form.Tags);
 
-            NextPage = CurrentPage.As<EditorPage>().PublishArticle();
+           CurrentPage.As<EditorPage>().PublishArticle();
+
+            CurrentPage = BasePage.GetArticlePage(CurrentDriver);
 
         }
 
