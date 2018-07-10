@@ -10,14 +10,6 @@ namespace GABAK.Automation.UI.Acceptance.Base
         public string BaseURL { get; set; }
         public virtual string DefaultTitle { get { return ""; } }
 
-        protected TPage GetPageWithTitle<TPage>() where TPage : BasePage, new()
-        {
-            TPage pageInstance = new TPage();
-
-            PageFactory.InitElements(Driver, pageInstance);
-            return pageInstance;
-        }
-
         protected TPage GetPage<TPage>(IWebDriver driver = null, string expectedTitle = "") where TPage : BasePage, new()
         {
             return GetPage<TPage>(driver ?? Driver, BaseURL, expectedTitle);
@@ -31,7 +23,8 @@ namespace GABAK.Automation.UI.Acceptance.Base
             {
                 Driver = driver
             };
-            PageFactory.InitElements(driver, pageInstance);
+           
+            PageFactory.InitElements(driver, pageInstance);       
             return pageInstance;
         }
 
@@ -53,7 +46,6 @@ namespace GABAK.Automation.UI.Acceptance.Base
                                             });
 
             AssertIsEqual(expectedTitle, driver.Title, "Page Title");
-
             return pageInstance;
         }
 

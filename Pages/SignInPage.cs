@@ -1,4 +1,5 @@
-﻿using GABAK.Automation.UI.Acceptance.Base;
+﻿using System.Threading;
+using GABAK.Automation.UI.Acceptance.Base;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
@@ -36,10 +37,10 @@ namespace GABAK.Automation.UI.Acceptance.Pages
         }
 
         public HomePageOnline ClickSignInButton()
-        {
-            Sign_In_Button.Click();
-            return GetPageWithTitle<HomePageOnline>();
-            //return GetPage<HomePageOnline>();
+        {    
+            ClickOnElement(Sign_In_Button);
+            WaitForPageToChange(DefaultTitle);
+            return GetPage<HomePageOnline>();
         }
 
         #endregion

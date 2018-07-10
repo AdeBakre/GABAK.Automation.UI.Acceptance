@@ -11,7 +11,7 @@ namespace GABAK.Automation.UI.Acceptance.Pages
 {
     public class ArticlePage : BasePage
     {
-        public override string DefaultTitle { get { return "Editor — Conduit"; } }
+        public override string DefaultTitle { get { return "TestArticle11 — Conduit"; } }
 
         #region Webelements
 
@@ -30,17 +30,21 @@ namespace GABAK.Automation.UI.Acceptance.Pages
 
         public bool GetArticleTitleDisplayed()
         {
+            WaitTillElementDisplayed(Article_Title);
             return Article_Title.Displayed;
         }
 
         public bool GetArticleContentDisplayed()
         {
+            WaitTillElementDisplayed(CommentSection);
             return ArticleContentField.Displayed;
         }
 
         public bool GetCommentDisplayed()
         {
+            WaitTillElementDisplayed(CommentSection);
             return CommentSection.Displayed;
+
         }
 
         #endregion

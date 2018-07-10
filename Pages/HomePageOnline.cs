@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using GABAK.Automation.UI.Acceptance.Base;
+
 
 namespace GABAK.Automation.UI.Acceptance.Pages
 {
@@ -34,7 +36,7 @@ namespace GABAK.Automation.UI.Acceptance.Pages
 
         public bool GetUserNameDisplayed()
         {
-
+            WaitTillElementDisplayed(Username);
             return Username.Displayed;
             
         }
@@ -46,6 +48,7 @@ namespace GABAK.Automation.UI.Acceptance.Pages
 
         public bool GetYourFeedLinkDisplayed()
         {
+            WaitTillElementDisplayed(YourFeedsLink);
             return YourFeedsLink.Displayed;
         }
 
@@ -64,8 +67,9 @@ namespace GABAK.Automation.UI.Acceptance.Pages
 
         public void ClickOnNewArticle()
         {
-            New_Article.Click();
-
+            ClickOnElement(New_Article);
+            WaitForPageToChange(DefaultTitle);
+            
         }
 
         #endregion

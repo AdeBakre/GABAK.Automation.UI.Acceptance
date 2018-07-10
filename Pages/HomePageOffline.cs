@@ -33,28 +33,33 @@ namespace GABAK.Automation.UI.Acceptance.Pages
 
         public bool GetSignInDisplayed()
         {
+            WaitTillElementDisplayed(SignIn_link);
             return SignIn_link.Displayed;
         }
 
         public SignUpPage ClickSignUpLink()
         {
-            SignUp_link.Click();
+            ClickOnElement(SignUp_link);
+            WaitForPageToChange(DefaultTitle);
             return GetPage<SignUpPage>();
         }
 
         public SignInPage ClickSignInLink()
         {
-            SignIn_link.Click();
+            ClickOnElement(SignIn_link);
+            WaitForPageToChange(DefaultTitle);
             return GetPage<SignInPage>();
         }
 
         public bool GetResultGlobalFeedDisplayed()
         {
+            WaitTillElementDisplayed(GlobalFeed_link);
             return GlobalFeed_link.Displayed;
         }
 
         public bool GetResultPopularTagsDisplayed()
         {
+            WaitTillElementDisplayed(PopularTags_section);
             return PopularTags_section.Displayed;
         }
 
@@ -63,11 +68,12 @@ namespace GABAK.Automation.UI.Acceptance.Pages
             //Just click on the first icon you see.
             foreach (var likes in All_Likes_icons)
             {
-                likes.Click();
+                ClickOnElement(likes);
                 break;
 
             }
 
+            WaitForPageToChange(DefaultTitle);
             return GetPage<SignUpPage>();
         }
 

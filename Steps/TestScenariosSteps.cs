@@ -3,12 +3,15 @@ using GABAK.Automation.UI.Acceptance.Pages;
 using NUnit.Framework;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
+using GABAK.Automation.UI.Acceptance;
 
 namespace GABAK.Automation.UI.Acceptance.Steps
 {
     [Binding]
     public class TestScenariosSteps : BaseSteps
     {
+        
+
         [Given(@"a user is on the offline homepage")]
         public void GivenAUserIsOnTheHomepage()
         {
@@ -63,6 +66,7 @@ namespace GABAK.Automation.UI.Acceptance.Steps
         {
             
             Assert.True(CurrentPage.As<HomePageOnline>().GetUserNameDisplayed());
+            //Reporter.Pass();
         }
 
         [When(@"the user signs in")]
@@ -74,7 +78,9 @@ namespace GABAK.Automation.UI.Acceptance.Steps
             CurrentPage.As<SignInPage>().EnterEmailAddress(form.email);
             CurrentPage.As<SignInPage>().EnterPassword(form.password);
 
-            NextPage = CurrentPage.As<SignInPage>().ClickSignInButton();
+           CurrentPage.As<SignInPage>().ClickSignInButton();
+
+            CurrentPage = BasePage.GetHomePageOnline(CurrentDriver);
         }
 
 
@@ -113,6 +119,7 @@ namespace GABAK.Automation.UI.Acceptance.Steps
         {
            Assert.True(CurrentPage.As<HomePageOffline>().GetResultGlobalFeedDisplayed());
             Assert.True(CurrentPage.As<HomePageOffline>().GetResultGlobalFeedDisplayed());
+            
         }
 
         [When(@"a user tries to like an article")]

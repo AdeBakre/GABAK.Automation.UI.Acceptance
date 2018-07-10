@@ -1,4 +1,6 @@
-﻿using GABAK.Automation.UI.Acceptance.Base;
+﻿using System;
+using System.Threading;
+using GABAK.Automation.UI.Acceptance.Base;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 
@@ -42,7 +44,7 @@ namespace GABAK.Automation.UI.Acceptance.Pages
             //Branch out if email text contains the word random
             if (email.Contains("random"))
             {          
-                email = RandomNumberGenerator(email);
+                email = RandomEmailGenerator(email);
             }
            
                 Email_Text_Box.SendKeys(email);
@@ -55,9 +57,9 @@ namespace GABAK.Automation.UI.Acceptance.Pages
 
         public HomePageOnline ClickSignUpButton()
         {
-            Sign_In_Button.Click();
+            ClickOnElement(Sign_In_Button);
+            WaitForPageToChange(DefaultTitle);
             return GetPage<HomePageOnline>();
-            //return GetPageWithTitle<HomePageOnline>();
 
         }
 
@@ -68,6 +70,7 @@ namespace GABAK.Automation.UI.Acceptance.Pages
 
         public bool ErrorMessageForInvalidDisplayed()
         {
+            WaitTillElementDisplayed(Invalid_Details_Error_Message);
             return Invalid_Details_Error_Message.Displayed;
         }
 

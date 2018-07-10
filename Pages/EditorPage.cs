@@ -52,7 +52,8 @@ namespace GABAK.Automation.UI.Acceptance.Pages
 
         public ArticlePage PublishArticle()
         {
-            Publish_Article.Click();
+            ClickOnElement(Publish_Article);
+            WaitForPageToChange(DefaultTitle);
             return GetPage<ArticlePage>();
         }
 

@@ -1,23 +1,22 @@
-﻿
-
-using System.Drawing.Imaging;
+﻿using System.Configuration;
 using Baseclass.Contrib.SpecFlow.Selenium.NUnit.Bindings;
 using NUnit.Framework;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
+
 
 
 namespace GABAK.Automation.UI.Acceptance.Base
 {
-    public class TestFixtureBase
+    public class TestFixtureBase : Browser
     {
         protected IWebDriver CurrentDriver { get; set; }
+        private string browser = ConfigurationManager.AppSettings["browserName"];
 
         [SetUp]
         public void Test_Setup()
         {
-            //CurrentDriver = Browser.Current;
-            CurrentDriver = new ChromeDriver();
+
+            CurrentDriver = BrowserConfig.SetDriverInstance(browser);
         }
 
 

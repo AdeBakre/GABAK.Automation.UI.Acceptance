@@ -8,7 +8,7 @@ Scenario: User signs up
 	Given a user is on the offline homepage
 	When the user signs up
 	| username | email              | password  |
-	| jorandom | jb@randomemail.com | p@ssword1 |
+	| jorandom | random@email.com | p@ssword1 |
 	Then the user is automatically logged in
 	And the user's name is displayed
 @UI
@@ -38,10 +38,10 @@ Scenario Outline: Verify validation errors for invalid details
 	And the user clicks on the sign up button
 	Then a validation error is displayed
 	Examples: 
-	| username   | email_address      | password |
-	| joe_bloggs | joe@randommail.com | p@ssword |
-	| jblrandom  | giggus01@email.com | password |
-	| jblrandom  | joe@randommail.com | p        |
+	| username | email_address      | password |
+	| giggus   | random             | password |
+	| random   | giggus01@email.com | password |
+	| random   | random             | short    |
 @UI@Fail
 Scenario: User signs up and your feed is displayed
 	Given a user is on the offline homepage

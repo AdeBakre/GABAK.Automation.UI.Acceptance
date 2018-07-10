@@ -83,7 +83,7 @@ this.ScenarioSetup(scenarioInfo);
                         "password"});
             table1.AddRow(new string[] {
                         "jorandom",
-                        "jb@randomemail.com",
+                        "random@email.com",
                         "p@ssword1"});
 #line 9
  testRunner.When("the user signs up", ((string)(null)), table1, "When ");
@@ -162,9 +162,9 @@ this.ScenarioSetup(scenarioInfo);
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Verify validation errors for invalid details")]
         [NUnit.Framework.CategoryAttribute("UI")]
-        [NUnit.Framework.TestCaseAttribute("joe_bloggs", "joe@randommail.com", "p@ssword", null)]
-        [NUnit.Framework.TestCaseAttribute("jblrandom", "giggus01@email.com", "password", null)]
-        [NUnit.Framework.TestCaseAttribute("jblrandom", "joe@randommail.com", "p", null)]
+        [NUnit.Framework.TestCaseAttribute("giggus", "random", "password", null)]
+        [NUnit.Framework.TestCaseAttribute("random", "giggus01@email.com", "password", null)]
+        [NUnit.Framework.TestCaseAttribute("random", "random", "short", null)]
         public virtual void VerifyValidationErrorsForInvalidDetails(string username, string email_Address, string password, string[] exampleTags)
         {
             string[] @__tags = new string[] {

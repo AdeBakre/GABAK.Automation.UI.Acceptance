@@ -2,6 +2,8 @@
 using System.Threading;
 using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+
 
 namespace GABAK.Automation.UI.Acceptance.Base
 {
@@ -16,6 +18,13 @@ namespace GABAK.Automation.UI.Acceptance.Base
             element.SendKeys(value);
         }
 
+        public void ClickOnElement(IWebElement element)
+        {
+            WaitTillElementDisplayed(element);
+            element.Click();
+            
+        }
+
         public string RandomEmailGenerator(string startName)
         {          
             int randomInt = randomGenerator.Next(100000);
@@ -24,23 +33,51 @@ namespace GABAK.Automation.UI.Acceptance.Base
 
         public string RandomNumberGenerator(string startName)
         {
-            int randomInt = randomGenerator.Next(1000);
+            int randomInt = randomGenerator.Next(10000);
             return startName + randomInt;
         }
 
-        public void WaitUpTo(int milliseconds, Func<bool> Condition, string description)
+        public void WaitTillElementDisplayed(IWebElement Element)
         {
-            int timeElapsed = 0;
-            while (!Condition() && timeElapsed < milliseconds)
+            TimeSpan timeout = new TimeSpan(0,0,15);
+            WebDriverWait wait = new WebDriverWait(Driver, timeout);
+
+            Func<IWebDriver, bool> waitForElement = new Func<IWebDriver, bool>((IWebDriver Web) =>
             {
-                Thread.Sleep(100);
-                timeElapsed += 100;
+                if (Element.Displayed)
+                {
+                    return true;
+                }
+
+                return false;
+            });
+
+            wait.Until(waitForElement);
+        }
+
+        public void WaitForPageToChange(string pageTitle,IWebDriver driver = null)
+        {
+            TimeSpan timeout = new TimeSpan(0, 0, 15);
+            WebDriverWait wait = new WebDriverWait(Driver, timeout);
+
+            if (driver == null)
+            {
+                driver = Driver;
             }
 
-            if (timeElapsed >= milliseconds || !Condition())
+            //I know this can be improved on with a lambda expression but..
+            Func<IWebDriver, bool> waitForPageTitle = new Func<IWebDriver, bool>((IWebDriver Web) =>
             {
-                throw new AssertionException("Timed out while waiting for: " + description);
-            }
+                if (pageTitle.Equals(Driver.Title))
+                {
+
+                    return false;
+                }
+
+                return true;
+            });
+          
+            wait.Until(waitForPageTitle);
         }
 
         public static void AssertIsEqual(string expectedValue, string actualValue, string elementDescription)
